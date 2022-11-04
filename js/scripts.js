@@ -7,6 +7,7 @@ function Pizza(toppings, size) {
 
 Pizza.prototype.calculateCost = function () {
   let cost = 0;
+  console.log(this.toppings);
   switch (this.toppings.length) {
     case 0:
       cost -= 5;
@@ -65,7 +66,25 @@ Cart.prototype.calculateCost = function () {
 }
 
 //UI Logic
+function addPizza (){
+  const toppings = document.querySelectorAll('[name="toppings"]:checked').value;
+  const size = document.querySelectorAll('[name="pizza-size"]').value;
+  console.log(toppings);
+  console.log(size);
+  myCart.addPizza(new Pizza(toppings, size));
+}
+
+function submitName(e){
+  e.preventDefault();
+  const name = document.getElementById("name").value;
+  const address = document.getElementById("address").value;
+  myCart = new Cart(name, address);
+  document.getElementById("name-form").setAttribute("class", "hidden");
+  document.getElementById("pizza-form").removeAttribute("class");
+  document.getElementById("add-pizza-btn").addEventListener("click", addPizza);
+}
+
 window.addEventListener("load", function (){
-  this.document.getElementById("name-form").addEventListener("click", submitName);
+  this.document.getElementById("name-form").addEventListener("submit", submitName);
 });
 
