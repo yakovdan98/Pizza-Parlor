@@ -1,3 +1,4 @@
-function Pizza() {
-  this.pizza = "pizza"
+function Pizza(toppings, size) {
+  this.toppings = toppings;
+  this.size = size;
 }
