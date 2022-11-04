@@ -66,6 +66,17 @@ Cart.prototype.calculateCost = function () {
 }
 
 //UI Logic
+function resetForm() {
+  const toppings = document.querySelectorAll('[name="toppings"]');
+  toppings.forEach(function (topping) {
+    topping.checked = false;
+  });
+  document.querySelector('[name="pizza-size"]:checked').checked = false;
+}
+function outputCart() {
+
+}
+
 function addPizza (){
   const toppings = document.querySelectorAll('[name="toppings"]');
   const selectedToppings = [];
@@ -74,10 +85,12 @@ function addPizza (){
     selectedToppings.push(topping.value);
   });
 
-  const size = document.querySelector('[name="pizza-size"]').value;
+  const size = document.querySelector('[name="pizza-size"]:checked').value;
   console.log(selectedToppings);
   console.log(size);
   myCart.addPizza(new Pizza(selectedToppings, size));
+  resetForm();
+  outputCart();
 }
 
 function submitName(e){
