@@ -37,3 +37,4 @@ Pizza.prototype.calculateCost = function () {
   }
   return cost;
 }
+
