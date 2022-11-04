@@ -73,8 +73,23 @@ function resetForm() {
   });
   document.querySelector('[name="pizza-size"]:checked').checked = false;
 }
-function outputCart() {
 
+function resetCart() {
+  document.getElementById("cart").innerText = null;
+}
+
+function outputCart() {
+  // console.log("adding pizza");
+  // console.log(myCart.currentId + 1 );
+  for (let i = 0; i < myCart.currentId + 1; i++){
+    // console.log(i < myCart.pizzas.currentId + 1);
+    if (myCart.pizzas[i] !== undefined){
+      console.log("pizza added");
+      const h5 = document.createElement("h5");
+      h5.append(myCart.pizzas[i].size + " pizza");
+      document.getElementById("cart").append(h5);
+    }
+  }
 }
 
 function addPizza (){
@@ -90,6 +105,7 @@ function addPizza (){
   console.log(size);
   myCart.addPizza(new Pizza(selectedToppings, size));
   resetForm();
+  resetCart();
   outputCart();
 }
 
@@ -100,6 +116,7 @@ function submitName(e){
   myCart = new Cart(name, address);
   document.getElementById("name-form").setAttribute("class", "hidden");
   document.getElementById("pizza-form").removeAttribute("class");
+  document.getElementById("cart-checkout").removeAttribute("class");
   document.getElementById("add-pizza-btn").addEventListener("click", addPizza);
 }
 
