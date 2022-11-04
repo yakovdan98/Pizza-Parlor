@@ -14,7 +14,7 @@ Describe: Cart(name, address)
 
 Test: "It should contain pizza objects"
 Code: const myCart = new cart("daniel","3828 Piermont Dr NE Albuquerque, NM 87111");
-Expected Output: Cart {name : "daniel", address: "3828 Piermont Dr NE Albuquerque, NM 87111", pizzas: {}}
+Expected Output: Cart {name : "daniel", address: "3828 Piermont Dr NE Albuquerque, NM 87111", pizzas: {}, currentId: 0}
 
 Describe: Cart.addPizza(pizza);
 
