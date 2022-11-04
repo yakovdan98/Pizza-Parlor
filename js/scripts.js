@@ -1,3 +1,4 @@
+//Business Logic
 function Pizza(toppings, size) {
   this.toppings = toppings;
   this.size = size;
@@ -63,7 +64,10 @@ Cart.prototype.calculateCost = function () {
   return cost;
 }
 
+//UI Logic
+window.addEventListener("load", function (){
+  myCart = new Cart("dan", "3828 Piermont Dr NE Albuquerque, NM 87111");
+  myCart.addPizza(new Pizza(["extra cheese", "chicken"], "large"));
+  myCart.addPizza(new Pizza(["pepperoni", "sausage"], "small"));
+});
 
-const myCart = new Cart("dan", "3828 Piermont Dr NE Albuquerque, NM 87111");
-myCart.addPizza(new Pizza(["extra cheese", "chicken"], "large"));
-myCart.addPizza(new Pizza(["pepperoni", "sausage"], "small"));
