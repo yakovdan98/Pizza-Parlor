@@ -1,6 +1,7 @@
 function Pizza(toppings, size) {
   this.toppings = toppings;
   this.size = size;
+  this.cost = this.calculateCost();
 }
 
 Pizza.prototype.calculateCost = function () {
@@ -38,6 +39,16 @@ Pizza.prototype.calculateCost = function () {
   return cost;
 }
 
-function Cart(){
+function Cart(name, address){
+  this.name = name;
+  this.address = address
   this.pizzas = {}
+  this.currentId = 0;
+  
+}
+
+Cart.prototype.addPizza(pizza){
+  pizza.id = this.currentId;
+  this.pizzas[currentId] = pizza;
+  this.currentId ++;
 }
