@@ -66,8 +66,6 @@ Cart.prototype.calculateCost = function () {
 
 //UI Logic
 window.addEventListener("load", function (){
-  myCart = new Cart("dan", "3828 Piermont Dr NE Albuquerque, NM 87111");
-  myCart.addPizza(new Pizza(["extra cheese", "chicken"], "large"));
-  myCart.addPizza(new Pizza(["pepperoni", "sausage"], "small"));
+  this.document.getElementById("name-form").addEventListener("click", submitName);
 });
 
