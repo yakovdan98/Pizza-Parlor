@@ -38,3 +38,6 @@ Pizza.prototype.calculateCost = function () {
   return cost;
 }
 
+function Cart(){
+  this.pizzas = {}
+}

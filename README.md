@@ -12,6 +12,18 @@ Expected Output: 23
 
 Describe: Cart()
 
-Test: "It should contain pizza objects and calculate the total cost of all the pizzas"
-Code: const myCart = new cart(pizza1, pizza2);
-Expected Output: pizza1 {toppings: ["anchovies", "pineapple"], size: "medium" }, pizza2 {toppings: ["cheese", "pepperoni"], size: "large" }
+Test: "It should contain pizza objects"
+Code: const myCart = new cart(pizza1);
+Expected Output: pizza1 {toppings: ["anchovies", "pineapple"], size: "medium" }
+
+Describe: Cart.addPizza();
+
+Test: "It should add another pizza"
+Code: myCart.addPizza(pizza2);
+Expected Output: pizza2 {toppings: ["pepperoni", "extra cheese"], size: "large" }
+
+Describe: Cart.calculateCost
+
+Test: "It should add the costs of all the pizzas"
+Code: const myCart.calculateCost();
+Expected Output: 50
