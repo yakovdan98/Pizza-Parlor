@@ -82,3 +82,9 @@ Describe: Cart.calculateCost()
 Test: "It should add the costs of all the pizzas in the cart"
 Code: const myCart.calculateCost();
 Expected Output: 50
+
+Describe: Cart.deletePizza(id)
+
+Test: "It should delete a pizza at the specified index and return true if it was deleted"
+Code: const myCart.deletePizza(0);
+Expected Output: true

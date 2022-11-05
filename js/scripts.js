@@ -55,6 +55,14 @@ Cart.prototype.addPizza = function (pizza) {
   this.currentId++;
 }
 
+Cart.prototype.deletePizza = function (id) {
+  if(this.pizzas[id] !== null){
+    delete this.pizzas[id];
+    return true;
+  }
+  return false;
+}
+
 Cart.prototype.calculateCost = function () {
   let cost = 0;
   for (let i = 0; i < this.currentId + 1; i++) {
@@ -78,18 +86,33 @@ function resetCart() {
   document.getElementById("cart").innerText = null;
 }
 
+function deleteItem(event) {
+  myCart.deletePizza(event.target.id);
+  event.target.parentElement.remove();
+
+}
+
 function outputCart() {
   // console.log("adding pizza");
   // console.log(myCart.currentId + 1 );
   for (let i = 0; i < myCart.currentId + 1; i++){
-    // console.log(i < myCart.pizzas.currentId + 1);
     if (myCart.pizzas[i] !== undefined){
       console.log("pizza added");
+      const div = document.createElement("div");
+      div.setAttribute("class", "item");
+      const button = document.createElement("button");
+      button.setAttribute("id", i);
+      button.setAttribute("class", "delete-button btn btn-primary");
+      button.addEventListener("click", deleteItem);
+      button.innerText = "X";
       const h5 = document.createElement("h5");
       h5.append(myCart.pizzas[i].size + " pizza");
-      document.getElementById("cart").append(h5);
+      div.append(h5);
+      div.append(button);
+      document.getElementById("cart").append(div);
     }
   }
+  document.getElementById("cost").innerText = myCart.calculateCost();
 }
 
 function addPizza (){
