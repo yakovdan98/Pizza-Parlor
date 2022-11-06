@@ -56,7 +56,7 @@ Cart.prototype.addPizza = function (pizza) {
 }
 
 Cart.prototype.deletePizza = function (id) {
-  if(this.pizzas[id] !== null){
+  if (this.pizzas[id] !== null) {
     delete this.pizzas[id];
     return true;
   }
@@ -66,7 +66,7 @@ Cart.prototype.deletePizza = function (id) {
 Cart.prototype.calculateCost = function () {
   let cost = 0;
   for (let i = 0; i < this.currentId + 1; i++) {
-    if(this.pizzas[i] !== undefined){
+    if (this.pizzas[i] !== undefined) {
       cost += this.pizzas[i].cost;
     }
   }
@@ -82,21 +82,18 @@ function resetForm() {
   document.querySelector('[name="pizza-size"]:checked').checked = false;
 }
 
-function resetCart() {
-  document.getElementById("cart").innerText = null;
-}
 
 function deleteItem(event) {
   myCart.deletePizza(event.target.id);
-  event.target.parentElement.remove();
-
+  outputCart();
 }
 
 function outputCart() {
   // console.log("adding pizza");
   // console.log(myCart.currentId + 1 );
-  for (let i = 0; i < myCart.currentId + 1; i++){
-    if (myCart.pizzas[i] !== undefined){
+  document.getElementById("cart").innerText = null;
+  for (let i = 0; i < myCart.currentId; i++) {
+    if (myCart.pizzas[i] !== undefined) {
       console.log("pizza added");
       const div = document.createElement("div");
       div.setAttribute("class", "item");
@@ -106,7 +103,7 @@ function outputCart() {
       button.addEventListener("click", deleteItem);
       button.innerText = "X";
       const h5 = document.createElement("h5");
-      h5.append(myCart.pizzas[i].size + " pizza");
+      h5.append(myCart.pizzas[i].size + " pizza " + "$" + myCart.pizzas[i].cost);
       div.append(h5);
       div.append(button);
       document.getElementById("cart").append(div);
@@ -115,12 +112,12 @@ function outputCart() {
   document.getElementById("cost").innerText = myCart.calculateCost();
 }
 
-function addPizza (){
+function addPizza() {
   const toppings = document.querySelectorAll('[name="toppings"]');
   const selectedToppings = [];
   toppings.forEach(function (topping) {
-    if(topping.checked)
-    selectedToppings.push(topping.value);
+    if (topping.checked)
+      selectedToppings.push(topping.value);
   });
 
   const size = document.querySelector('[name="pizza-size"]:checked').value;
@@ -128,11 +125,33 @@ function addPizza (){
   console.log(size);
   myCart.addPizza(new Pizza(selectedToppings, size));
   resetForm();
-  resetCart();
   outputCart();
 }
 
-function submitName(e){
+function checkout() {
+  document.getElementById("pizza-form").setAttribute("class", "hidden");
+  document.getElementById("cart-checkout").setAttribute("class", "hidden");
+  const h1 = document.createElement("h1");
+  h1.append("Thank you for your order " + myCart.name + "!");
+  const h2 = document.createElement("h3");
+  h2.append("The following order will be delivered to " + myCart.address);
+  const div = document.getElementById("checkout-message");
+  div.append(h1);
+  div.append(h2);
+
+  for (let i = 0; i < myCart.currentId; i++) {
+    if (myCart.pizzas[i] !== undefined) {
+      const pizzaDiv = document.createElement("div");
+      pizzaDiv.setAttribute("class", "item");
+      const h5 = document.createElement("h5");
+      h5.append(myCart.pizzas[i].size + " pizza " + "$" + myCart.pizzas[i].cost);
+      pizzaDiv.append(h5);
+      div.append(pizzaDiv);
+    }
+  }
+}
+
+function submitName(e) {
   e.preventDefault();
   const name = document.getElementById("name").value;
   const address = document.getElementById("address").value;
@@ -141,9 +160,10 @@ function submitName(e){
   document.getElementById("pizza-form").removeAttribute("class");
   document.getElementById("cart-checkout").removeAttribute("class");
   document.getElementById("add-pizza-btn").addEventListener("click", addPizza);
+  document.getElementById("checkout").addEventListener("click", checkout);
 }
 
-window.addEventListener("load", function (){
+window.addEventListener("load", function () {
   this.document.getElementById("name-form").addEventListener("submit", submitName);
 });
 
