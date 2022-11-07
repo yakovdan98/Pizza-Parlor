@@ -88,6 +88,34 @@ function deleteItem(event) {
   outputCart();
 }
 
+function displayPizza(index, location) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "item");
+
+  const h5 = document.createElement("h5");
+  h5.append(myCart.pizzas[index].size + " pizza " + "$" + myCart.pizzas[index].cost);
+
+  const ul = document.createElement("ul");
+  myCart.pizzas[index].toppings.forEach(function (topping) {
+    const li = document.createElement("li");
+    li.append(topping);
+    ul.append(li);
+  });
+
+  if(location === "cart"){
+    const button = document.createElement("button");
+    button.setAttribute("id", index);
+    button.setAttribute("class", "delete-button btn btn-primary");
+    button.addEventListener("click", deleteItem);
+    button.innerText = "X";
+    div.append(button);
+  }
+
+  div.append(h5);
+  div.append(ul);
+  return div;
+}
+
 function outputCart() {
   // console.log("adding pizza");
   // console.log(myCart.currentId + 1 );
@@ -95,18 +123,7 @@ function outputCart() {
   for (let i = 0; i < myCart.currentId; i++) {
     if (myCart.pizzas[i] !== undefined) {
       console.log("pizza added");
-      const div = document.createElement("div");
-      div.setAttribute("class", "item");
-      const button = document.createElement("button");
-      button.setAttribute("id", i);
-      button.setAttribute("class", "delete-button btn btn-primary");
-      button.addEventListener("click", deleteItem);
-      button.innerText = "X";
-      const h5 = document.createElement("h5");
-      h5.append(myCart.pizzas[i].size + " pizza " + "$" + myCart.pizzas[i].cost);
-      div.append(h5);
-      div.append(button);
-      document.getElementById("cart").append(div);
+      document.getElementById("cart").append(displayPizza(i, "cart"));
     }
   }
   document.getElementById("cost").innerText = myCart.calculateCost();
@@ -141,12 +158,7 @@ function checkout() {
 
   for (let i = 0; i < myCart.currentId; i++) {
     if (myCart.pizzas[i] !== undefined) {
-      const pizzaDiv = document.createElement("div");
-      pizzaDiv.setAttribute("class", "item");
-      const h5 = document.createElement("h5");
-      h5.append(myCart.pizzas[i].size + " pizza " + "$" + myCart.pizzas[i].cost);
-      pizzaDiv.append(h5);
-      div.append(pizzaDiv);
+      div.append(displayPizza(i, "checkout"));
     }
   }
 }
