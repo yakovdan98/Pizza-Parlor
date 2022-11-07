@@ -17,7 +17,7 @@
     <div class="jumbotron">
       <h1 class="display-4">Tony's Pizzeria</h1>
       <p class="lead">If it ain't Tony's its not pizza</p>
-      <p>Start your order by entering your information bellow</p>
+      <p>Start your order by entering your information below</p>
     </div>
     <div class="header-pizza">
 
@@ -32,8 +32,11 @@
             </div>
           </div>
           <input id="name" name="name" type="text" class="form-control">
+
         </div>
+        <div id="name-error"></div>
       </div>
+
       <div class="form-group">
         <label for="address">Address</label>
         <div class="input-group">
@@ -43,8 +46,11 @@
             </div>
           </div>
           <input id="address" name="address" type="text" class="form-control">
+
         </div>
+        <div id="address-error"></div>
       </div>
+
       <div class="form-group">
         <button name="submit" type="submit" class="btn btn-primary">Submit</button>
       </div>
@@ -67,7 +73,9 @@
             <label for="pizza-size_2" class="custom-control-label">Large</label>
           </div>
         </div>
+        <div id="size-error"></div>
       </div>
+
       <div class="form-group">
         <label>Toppings:</label>
         <div>
@@ -104,7 +112,9 @@
             <label for="toppings_7" class="custom-control-label">Mushroom</label>
           </div>
         </div>
+        <div id="topping-error"></div>
       </div>
+
       <div class="form-group">
         <button type="button" id="add-pizza-btn" class="btn btn-primary">Add Pizza</button>
       </div>

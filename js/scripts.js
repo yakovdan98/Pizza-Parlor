@@ -102,7 +102,7 @@ function displayPizza(index, location) {
     ul.append(li);
   });
 
-  if(location === "cart"){
+  if (location === "cart") {
     const button = document.createElement("button");
     button.setAttribute("id", index);
     button.setAttribute("class", "delete-button btn btn-primary");
@@ -130,6 +130,8 @@ function outputCart() {
 }
 
 function addPizza() {
+  clearError("topping-error");
+  clearError("size-error");
   const toppings = document.querySelectorAll('[name="toppings"]');
   const selectedToppings = [];
   toppings.forEach(function (topping) {
@@ -137,13 +139,29 @@ function addPizza() {
       selectedToppings.push(topping.value);
   });
 
-  const size = document.querySelector('[name="pizza-size"]:checked').value;
-  console.log(selectedToppings);
-  console.log(size);
-  myCart.addPizza(new Pizza(selectedToppings, size));
-  resetForm();
-  outputCart();
+  let size = document.querySelector('[name="pizza-size"]:checked');
+
+  if (selectedToppings.length === 0) {
+
+    errorMessage("topping-error");
+  }
+
+  if (size === null) {
+
+    errorMessage("size-error");
+  }
+
+  if (size !== null && selectedToppings.length !== 0) {
+    size = size.value;
+    console.log(selectedToppings);
+    console.log(size);
+    myCart.addPizza(new Pizza(selectedToppings, size));
+    resetForm();
+    outputCart();
+  }
 }
+
+
 
 function checkout() {
   document.getElementById("pizza-form").setAttribute("class", "hidden");
@@ -163,16 +181,38 @@ function checkout() {
   }
 }
 
+function clearError(location) {
+  document.getElementById(location).innerHTML = null;
+  document.getElementById(location).setAttribute("class", location);
+}
+
+function errorMessage(location) {
+  document.getElementById(location).innerHTML = "please enter valid input";
+  document.getElementById(location).setAttribute("class", location + " text-danger");
+}
+
 function submitName(e) {
   e.preventDefault();
+  clearError("address-error");
+  clearError("name-error");
   const name = document.getElementById("name").value;
   const address = document.getElementById("address").value;
-  myCart = new Cart(name, address);
-  document.getElementById("name-form").setAttribute("class", "hidden");
-  document.getElementById("pizza-form").removeAttribute("class");
-  document.getElementById("cart-checkout").removeAttribute("class");
-  document.getElementById("add-pizza-btn").addEventListener("click", addPizza);
-  document.getElementById("checkout").addEventListener("click", checkout);
+  if (name === "") {
+
+    errorMessage("name-error");
+  }
+  if (address === "") {
+
+    errorMessage("address-error");
+  }
+  if (name !== "" && address !== "") {
+    myCart = new Cart(name, address);
+    document.getElementById("name-form").setAttribute("class", "hidden");
+    document.getElementById("pizza-form").removeAttribute("class");
+    document.getElementById("cart-checkout").removeAttribute("class");
+    document.getElementById("add-pizza-btn").addEventListener("click", addPizza);
+    document.getElementById("checkout").addEventListener("click", checkout);
+  }
 }
 
 window.addEventListener("load", function () {
