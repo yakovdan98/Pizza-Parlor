@@ -1,3 +1,26 @@
+.jumbotron {
+  margin: 0;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: rgb(196, 201, 255);
+  text-align: center;
+}
+
+.jumbotron h1 {
+  font-weight:700;
+  color: white;
+}
+
+.jumbotron p {
+  font-weight: 700;
+  color: white;
+}
+
+.header-pizza {
+  background: url("https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/hjznkvic/b07fa72c-d2c1-4bf8-a97b-f4fd02aa03c6.jpg");
+  background-position: 0 -100px;
+  height: 20vh;
+}
 .hidden {
   display: none;
 }
