@@ -9,9 +9,6 @@ Pizza.prototype.calculateCost = function () {
   let cost = 0;
   console.log(this.toppings);
   switch (this.toppings.length) {
-    case 0:
-      cost -= 5;
-      break;
     case 1:
       cost -= 2;
       break;
@@ -93,10 +90,10 @@ function displayPizza(index, location) {
   div.setAttribute("class", "item");
 
   const h5 = document.createElement("h5");
-  h5.append(myCart.pizzas[index].size + " pizza " + "$" + myCart.pizzas[index].cost);
+  h5.append(window.myCart.pizzas[index].size + " pizza " + "$" + window.myCart.pizzas[index].cost);
 
   const ul = document.createElement("ul");
-  myCart.pizzas[index].toppings.forEach(function (topping) {
+  window.myCart.pizzas[index].toppings.forEach(function (topping) {
     const li = document.createElement("li");
     li.append(topping);
     ul.append(li);
@@ -120,13 +117,13 @@ function outputCart() {
   // console.log("adding pizza");
   // console.log(myCart.currentId + 1 );
   document.getElementById("cart").innerText = null;
-  for (let i = 0; i < myCart.currentId; i++) {
-    if (myCart.pizzas[i] !== undefined) {
+  for (let i = 0; i < window.myCart.currentId; i++) {
+    if (window.myCart.pizzas[i] !== undefined) {
       console.log("pizza added");
       document.getElementById("cart").append(displayPizza(i, "cart"));
     }
   }
-  document.getElementById("cost").innerText = myCart.calculateCost();
+  document.getElementById("cost").innerText = window.myCart.calculateCost();
 }
 
 function addPizza() {
@@ -155,7 +152,7 @@ function addPizza() {
     size = size.value;
     console.log(selectedToppings);
     console.log(size);
-    myCart.addPizza(new Pizza(selectedToppings, size));
+    window.myCart.addPizza(new Pizza(selectedToppings, size));
     resetForm();
     outputCart();
   }
@@ -167,15 +164,15 @@ function checkout() {
   document.getElementById("pizza-form").setAttribute("class", "hidden");
   document.getElementById("cart-checkout").setAttribute("class", "hidden");
   const h1 = document.createElement("h1");
-  h1.append("Thank you for your order " + myCart.name + "!");
+  h1.append("Thank you for your order " + window.myCart.name + "!");
   const h2 = document.createElement("h3");
-  h2.append("The following order will be delivered to " + myCart.address);
+  h2.append("The following order will be delivered to " + window.myCart.address);
   const div = document.getElementById("checkout-message");
   div.append(h1);
   div.append(h2);
 
-  for (let i = 0; i < myCart.currentId; i++) {
-    if (myCart.pizzas[i] !== undefined) {
+  for (let i = 0; i < window.myCart.currentId; i++) {
+    if (window.myCart.pizzas[i] !== undefined) {
       div.append(displayPizza(i, "checkout"));
     }
   }
@@ -206,7 +203,7 @@ function submitName(e) {
     errorMessage("address-error");
   }
   if (name !== "" && address !== "") {
-    myCart = new Cart(name, address);
+    window.myCart = new Cart(name, address);
     document.getElementById("name-form").setAttribute("class", "hidden");
     document.getElementById("pizza-form").removeAttribute("class");
     document.getElementById("cart-checkout").removeAttribute("class");

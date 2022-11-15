@@ -62,8 +62,55 @@ Expected Output: Pizza { toppings: ["anchovies", "pineapple"], size: "medium" }
 Describe: Pizza.calculateCost()
 
 Test: "It should return the cost of the pizza derived from the size and toppings"
-Code: const myPizza.calculateCost();
-Expected Output: 23
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple"], "small");
+const myPizza.calculateCost();
+Expected Output: 11
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+const myPizza.calculateCost();
+Expected Output: 16
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple"], "large");
+const myPizza.calculateCost();
+Expected Output: 21
+
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies"], "medium");
+const myPizza.calculateCost();
+Expected Output: 13
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+const myPizza.calculateCost();
+Expected Output: 16
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple", "mushrooms"], "medium");
+const myPizza.calculateCost();
+Expected Output: 20
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple", "mushrooms", "Extra Cheese"], "medium");
+const myPizza.calculateCost();
+Expected Output: 22
+
+Test: "It should return the cost of the pizza derived from the size and toppings"
+Code: 
+const myPizza = new Pizza(["anchovies", "pineapple", "mushrooms", "Extra Cheese", "onions"], "medium");
+const myPizza.calculateCost();
+Expected Output: 25
+
+
 
 Describe: Cart(name, address)
 
@@ -74,14 +121,21 @@ Expected Output: Cart {name : "daniel", address: "3828 Piermont Dr NE Albuquerqu
 Describe: Cart.addPizza(pizza);
 
 Test: "It should add another pizza"
-Code: myCart.addPizza(pizza2);
-Expected Output: pizza2 {toppings: ["pepperoni", "extra cheese"], size: "large" }
+Code:
+const myCart = new cart("daniel","3828 Piermont Dr NE Albuquerque, NM 87111");
+const pizza2 = new Pizza(["anchovies", "pineapple"], "medium");
+myCart.addPizza(pizza2);
+Expected Output: pizza2 {toppings: ["anchovies", "pineapple"], size: "medium" }
 
 Describe: Cart.calculateCost()
 
 Test: "It should add the costs of all the pizzas in the cart"
-Code: const myCart.calculateCost();
-Expected Output: 50
+Code: 
+const myCart = new cart("daniel","3828 Piermont Dr NE Albuquerque, NM 87111");
+myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+myCart.addPizza(myPizza);
+const myCart.calculateCost();
+Expected Output: 16
 
 Describe: Cart.deletePizza(id)
 
